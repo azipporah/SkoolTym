@@ -42,6 +42,9 @@ const studentSchema = new mongoose.Schema({
         data: Buffer,
         contentType: String
     },
+    student_key: [{
+        key:Number        
+    }]
     
 },{
     timestamps: true

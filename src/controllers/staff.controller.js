@@ -60,7 +60,10 @@ module.exports = {
                     staff_email: req.body.staff_email,
                     staff_role: req.body.staff_role,
                     staff_gender: req.body.staff_gender,
-                    staff_profilePic:req.file.path
+                    staff_profilePic:req.file.path,
+                    staff_password: req.body.staff_password,
+                    confirm_password: req.body.confirm_password,
+                    staff_key: req.body.staff_key
                 }
 
                 const newStaff = await staffSchema.create(staff)
@@ -68,7 +71,7 @@ module.exports = {
 
                 return res.send(newStaff)
             } catch (error) {
-                res.send(error)
+                res.status(400).send(error.message)
             }
         })
 

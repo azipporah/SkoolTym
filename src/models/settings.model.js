@@ -3,45 +3,52 @@ const autoIncrementSettings = require('mongoose-sequence')(mongoose)
 // const schema = mongoose.Schema()
 
 const settingSchema = mongoose.Schema({
-    settings_schId: { type: mongoose.Types.ObjectId, ref: "Schools" },
+    school_id: {
+        type: mongoose.Types.ObjectId,
+        ref: "school"
+    },
     drop_off_start_time: {
-        // timestamps: true
+        type: String,
+        required: true
     },
     drop_off_end_time: {
-        // timestamps: true
+        type: String,
+        required: true
     },
     pick_up_start_time: {
-        // timestamps: true
+        type: String,
+        required: true
     },
     pick_up_end_time: {
-        // timestamps: true
+        type: String,
+        required: true
     },
     drop_off_allowance: {
-        type: Date
+        type: String,
+        required: true
     },
     pick_up_allowance: {
-        type: Date
+        type: String,
+        required: true
     },
     overtime_rate: {
-        type: Number
+        type: String
     },
     overtime_rate_currency: {
-        type: Number
+        type: String
     },
     overtime_interval: {
-        type: Date
+        type: String
     },
-    // isCompleted: {
-    //     type: Boolean,
-    //     required: true,
-    //     default:false
-    // }
-},{
+    settings_key: [{ //nesting an object to get the key of the settings
+        key: Number
+    }]
+}, {
     timestamps: true
 }
 )
 
-settingSchema.plugin(autoIncrementSettings, {inc_field:'settings_no'})
+settingSchema.plugin(autoIncrementSettings, { inc_field: 'settings_no' })
 
 
 const settings = mongoose.model('Settings', settingSchema)

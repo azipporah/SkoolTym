@@ -55,21 +55,23 @@ module.exports = {
                 const guardian = {
                     // school: req.body.school,
                     student: req.body.student,
+                    relationship: req.body.relationship,
                     guardian_fname: req.body.guardian_fname,
                     guardian_lname: req.body.guardian_lname,
                     guardian_contact: req.body.guardian_contact,
                     guardian_email: req.body.guardian_email,
                     guardian_gender: req.body.guardian_gender,
                     guardian_profile_pic: req.file.path,
-                    guardian_dateOfEntry: req.body.guardian_dateOfEntry
+                    guardian_dateOfEntry: req.body.guardian_dateOfEntry,
+                    guardian_key: req.body.guardian_key
                 }
 
                 const newGuardian = await guardianSchema.create(guardian)
-                newGuardian.save()
+                newGuardian.save().then(() => {res.status(201).send(newGuardian)})
 
-                return res.send(newGuardian)
             } catch (error) {
-                res.send(error)
+                // console.log(newGuardian);
+            res.status(400).send(error.message)
             }
         })
     }

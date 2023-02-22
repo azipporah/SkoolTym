@@ -60,41 +60,17 @@ module.exports =  {
                     school_badge: req.file.path,
                     school_address: req.body.school_address,
                     school_contact: req.body.school_contact,
-                    school_about: req.body.school_about
+                    school_about: req.body.school_about,
+                    school_key: req.body.school_key
                 }
 
                 const newSchool = await schoolSchema.create(school)
-                newSchool.save()
-                    .then(() => {
-                        console.log("sch badge saved");
-                        res.status(201).send(newSchool)
-                    })
+                newSchool.save().then(() => {res.status(201).send(newSchool)})
             }
             catch (error) {
-                // res.status(400).send(error)
+                res.status(400).send(error.message)
                 console.log(error);
             }
-        })
-
-
-        // try {
-        //     const newSchool = await schoolSchema.create({
-        //         school_name: req.body.school_name,
-        //         school_motto: req.body.school_motto,
-        //         school_badge: req.file.path,
-        //         school_address: req.body.school_address,
-        //         school_contact: req.body.school_contact,
-        //         school_about: req.body.school_about,
-        //         // school:req.body.school
-        //     })
-        //     const school = await newSchool.save()
-        
-        // return res.send(school)
-        // } catch (error) {
-        //     res.status(400).send(error)
-        //     console.log(error);
-        // }
-
-       
+        })       
     }
 }

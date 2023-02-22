@@ -11,6 +11,12 @@ const guardianSchema = mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "Students"
     },
+    relationship: {
+        type: String,
+        enum: ['Mother','Father','Brother','Sister','Driver'],
+        default: 'Mother',
+        required: true
+    },
     guardian_fname: {
         type: String,
         required: true
@@ -43,6 +49,9 @@ const guardianSchema = mongoose.Schema({
         type: Date,
         required: true
     },
+    guardian_key: [{
+        key:Number        
+    }]
     // isCompleted: {
     //     type: Boolean,
     //     required: true,

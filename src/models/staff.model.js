@@ -40,6 +40,17 @@ const staffSchema = new  mongoose.Schema({
         contentType: String,
         required: true
     },
+    staff_password: {
+        type: String,
+        required: true
+    },
+    confirm_password: {
+        type: String,
+        required: true
+    },
+    staff_key: [{
+        key:Number        
+    }]
     // isCompleted: {
     //     type: Boolean,
     //     required: true,

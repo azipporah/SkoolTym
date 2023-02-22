@@ -60,7 +60,8 @@ module.exports = {
                     student_email: req.body.student_email,
                     student_class: req.body.student_class,
                     student_gender: req.body.student_gender,
-                    student_profile_pic: req.file.path
+                    student_profile_pic: req.file.path,
+                    student_key: req.body.student_key
                     
                 }
 
@@ -69,7 +70,7 @@ module.exports = {
 
                 return res.send(newStudent)
             } catch (error) {
-                res.send(error)
+                res.status(400).send(error.message)
                 console.log(error);
             }
         })

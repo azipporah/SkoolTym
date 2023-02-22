@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const autoIncrementRole = require('mongoose-sequence')(mongoose)
-// const schema = mongoose.Schema()
 
 const roleSchema = mongoose.Schema({
     role_type:{
@@ -9,11 +8,9 @@ const roleSchema = mongoose.Schema({
         default: 'Admin',
         required: true
     },
-    // isCompleted: {
-    //     type: Boolean,
-    //     required: true,
-    //     default:false
-    // }
+    role_key: [{
+        key:Number
+    }]
 },{
     timestamps: true
 }

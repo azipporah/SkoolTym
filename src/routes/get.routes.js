@@ -8,8 +8,10 @@ const studentSchema = require('../models/students.model')
 const staffSchema = require('../models/staff.model')
 const guardianSchema = require('../models/guardians.model')
 const roleSchema = require('../models/roles.model')
+const overtimeSchema = require('../models/overtime.model')
 const settingSchema = require('../models/settings.model')
-const { populate } = require('../models/schools.model')
+const yearOfStudySchema = require('../models/yearOfStudy.model')
+const dropPickSchema = require('../models/dropOff-pickUp.model')
 
 // get all schools
 router.get("/schools", async (req, res) => {
@@ -51,6 +53,33 @@ router.get("/roles", async (req, res) => {
 router.get("/guardians", async (req, res) => {
     guardianSchema.find().then((guardians) => {
         res.status(200).send(guardians)
+    }).catch((error) => {
+        res.status(400).send(error)
+    });
+});
+
+// get all years of study
+router.get("/years", async (req, res) => {
+    yearOfStudySchema.find().then((years) => {
+        res.status(200).send(years)
+    }).catch((error) => {
+        res.status(400).send(error)
+    });
+});
+
+// get all overtime
+router.get("/overtime", async (req, res) => {
+    overtimeSchema.find().then((overtime) => {
+        res.status(200).send(overtime)
+    }).catch((error) => {
+        res.status(400).send(error)
+    });
+});
+
+// get all pickups/dropOffs
+router.get("/dropPick", async (req, res) => {
+    dropPickSchema.find().then((dropPick) => {
+        res.status(200).send(dropPick)
     }).catch((error) => {
         res.status(400).send(error)
     });

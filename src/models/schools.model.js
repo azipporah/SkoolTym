@@ -28,12 +28,16 @@ const schoolSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-},{
+    school_key: [{
+        key:Number        
+    }]
+}, {
     timestamps: true
-})
+},
+)
 
 // incrementing the school count after every save
-schoolSchema.plugin(autoIncrement, {inc_field:'school_no'})
+schoolSchema.plugin(autoIncrement, { inc_field: 'school_no' })
 
 const schools = mongoose.model('school', schoolSchema)
 module.exports = schools
