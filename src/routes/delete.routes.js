@@ -10,145 +10,186 @@ const guardianSchema = require('../models/guardians.model')
 const roleSchema = require('../models/roles.model')
 const yearOfStudySchema = require('../models/yearOfStudy.model')
 const overtimeSchema = require('../models/overtime.model')
-const dropPickSchema = require('../models/dropOff-pickUp.model')
+const dropoffSchema = require('../models/dropoff.model')
+const pickupSchema = require('../models/pickup.model')
 const settingSchema = require('../models/settings.model')
 
 // delete a school
-router.delete('/schools/:school_no', async (req, res) => {
+router.delete('/schools/:sch_id', async (req, res) => {
     try {
-        const sch = await schoolSchema.findById(req.params.id)
-        // if (!sch) {
-        //     res.status(404).send("School doesn't exist!")
-        // }
-        const schToDelete = await schoolSchema.deleteOne({ _id: req.params.school_no }) //checking if school with specified id exists in db/schema
-        res.json(schToDelete).then(() => {res.status(200).send("School deleted successfully")}) 
-        // res.json(schToDelete)
-
+        const school = await schoolSchema.findById({ _id: req.params.sch_id })
+        console.log(school);
+        if (school) {
+            const schoolToDelete = await schoolSchema.deleteOne({ _id: req.params.sch_id })
+            res.json(schoolToDelete)
+            // res.send('School deleted successfully')
+        }
+        else {
+            res.status(404).send("School doesn't exist!")
+        }
     } catch (error) {
-        // res.json({ message: error })
+        res.json({ message: error })
     }
 })
 
 // delete a student
-router.delete('/students/:student_no', async (req, res) => {
+router.delete('/students/:student_id', async (req, res) => {
     try {
-        const student = await studentSchema.findById(req.params.id)
-        // if (!student) {
-        //     res.status(404).send("Student doesn't exist!")
-        // }
-        const studentToDelete = await studentSchema.deleteOne({ _id: req.params.student_no }) //checking if student with specified student_no exists in db/schema
-        res.json(studentToDelete).then(() => {res.status(200).send("Student deleted successfully")}) 
-        // res.json(studentToDelete)
-
+        const student = await studentSchema.findById({ _id: req.params.student_id })
+        // console.log(student);
+        if (student) {
+            const studentToDelete = await studentSchema.deleteOne({ _id: req.params.student_id })
+            res.json(studentToDelete)
+            // res.send('Student deleted successfully')
+        }
+        else {
+            res.status(404).send("Student doesn't exist!")
+        }
     } catch (error) {
         res.json({ message: error })
     }
 })
 
 // delete a staff
-router.delete('/staff/:staff_no', async (req, res) => {
+router.delete('/staff/:staff_id', async (req, res) => {
     try {
-        const staff = await staffSchema.findById(req.params.id)
-        // if (!staff) {
-        //     res.status(404).send("Staff member doesn't exist!")
-        // }
-        const staffToDelete = await staffSchema.deleteOne({ _id: req.params.staff_no }) //checking if school with specified id exists in db/schema
-        res.json(staffToDelete).then(() => {res.status(200).send("Staff deleted successfully")}) 
-        // res.status(200).json(staffToDelete)
-
+        const staff = await staffSchema.findById({ _id: req.params.staff_id })
+        // console.log(staff);
+        if (staff) {
+            const staffToDelete = await staffSchema.deleteOne({ _id: req.params.staff_id })
+            res.json(staffToDelete)
+            // res.send('Staff deleted successfully')
+        }
+        else {
+            res.status(404).send("Staff doesn't exist!")
+        }
     } catch (error) {
-        res.json(error)
+        res.json({ message: error })
     }
 })
 
 // delete a guardian
-router.delete('/guardians/:guardian_no', async (req, res) => {
+router.delete('/guardians/:guardian_id', async (req, res) => {
     try {
-        const guardian = await guardianSchema.findById(req.params.id)
-        // if (!guardian) {
-        //     res.status(404).send("Guardian doesn't exist!")
-        // }
-        const guardianToDelete = await guardianSchema.deleteOne({ _id: req.params.guardian_no }) //checking if school with specified id exists in db/schema
-        res.json(guardianToDelete).then(() => {res.status(200).send("Guardian deleted successfully")}) 
-        // res.status(200).json(guardianToDelete)
-
+        const guardian = await guardianSchema.findById({ _id: req.params.guardian_id })
+        // console.log(guardian);
+        if (guardian) {
+            const guardianToDelete = await guardianSchema.deleteOne({ _id: req.params.guardian_id })
+            res.json(guardianToDelete)
+            // res.send('Guardian deleted successfully')
+        }
+        else {
+            res.status(404).send("Guardian doesn't exist!")
+        }
     } catch (error) {
         res.json({ message: error })
     }
 })
 
 // delete a role
-router.delete('/roles/:role_no', async (req, res) => {
+router.delete('/roles/:role_id', async (req, res) => {
     try {
-        const role = await roleSchema.findById(req.params.id)
-        // if (!role) {
-        //     res.status(404).send("Role doesn't exist!")
-        // }
-        const roleToDelete = await roleSchema.deleteOne({ _id: req.params.role_no }) //checking if school with specified id exists in db/schema
-        res.json(roleToDelete).then(() => {res.status(200).send("Role deleted successfully")}) 
-        // res.json(roleToDelete)
-
+        const role = await roleSchema.findById({ _id: req.params.role_id })
+        // console.log(role);
+        if (role) {
+            const roleToDelete = await roleSchema.deleteOne({ _id: req.params.role_id })
+            res.json(roleToDelete)
+            // res.send('Role deleted successfully')
+        }
+        else {
+            res.status(404).send("Role doesn't exist!")
+        }
     } catch (error) {
         res.json({ message: error })
     }
 })
 
 // delete a year of study
-router.delete('/years/:yearOfStudy_no', async (req, res) => {
+router.delete('/years/:year_id', async (req, res) => {
     try {
-        const yearOfStudy = await yearOfStudySchema.findById(req.params.id)
-        // if (!yearOfStudy) {
-        //     res.status(404).send("Year of study doesn't exist!")
-        // }
-        const yearToDelete = await yearOfStudySchema.deleteOne({ _id: req.params.yearOfStudy_no }) //checking if school with specified id exists in db/schema
-        res.json(yearToDelete).then(() => {res.status(200).send("Year of study deleted successfully")}) 
-
+        const year = await yearOfStudySchema.findById({ _id: req.params.year_id })
+        // console.log(year);
+        if (year) {
+            const yearToDelete = await yearOfStudySchema.deleteOne({ _id: req.params.year_id })
+            res.json(yearToDelete)
+            // res.send('Year of study deleted successfully')
+        }
+        else {
+            res.status(404).send("Year of study doesn't exist!")
+        }
     } catch (error) {
-        res.status(400).json({ message: error })
+        res.json({ message: error })
     }
 })
 
 // delete overtime
 router.delete('/overtime/:overtime_id', async (req, res) => {
     try {
-        const overtime = await overtimeSchema.findById(req.params.id)
-        // if (!yearOfStudy) {
-        //     res.status(404).send("Year of study doesn't exist!")
-        // }
-        const overtimeToDelete = await overtimeSchema.deleteOne({ _id: req.params.overtime_id }) //checking if school with specified id exists in db/schema
-        res.json(overtimeToDelete).then(() => {res.status(200).send("Overtime deleted successfully")}) 
-
+        const overtime = await overtimeSchema.findById({ _id: req.params.overtime_id })
+        // console.log(overtime);
+        if (overtime) {
+            const overtimeToDelete = await overtimeSchema.deleteOne({ _id: req.params.overtime_id })
+            res.json(overtimeToDelete)
+            // res.send('Overtime deleted successfully')
+        }
+        else {
+            res.status(404).send("Overtime doesn't exist!")
+        }
     } catch (error) {
-        res.status(400).json({ message: error })
+        res.json({ message: error })
     }
 })
 
-// delete drop-off/pick-off
-router.delete('/dropPick/:dropPick_id', async (req, res) => {
+// delete drop-off
+router.delete('/dropoff/:dropoff_id', async (req, res) => {
     try {
-        const dropPick = await dropPickSchema.findById(req.params.id)
-        // if (!yearOfStudy) {
-        //     res.status(404).send("Year of study doesn't exist!")
-        // }
-        const dropPickToDelete = await dropPickSchema.deleteOne({ _id: req.params.dropPick_id }) //checking if school with specified id exists in db/schema
-        res.json(dropPickToDelete).then(() => {res.status(200).send("Drop/pick deleted successfully")}) 
-
+        const dropoff = await eventSchema.findById({ _id: req.params.dropoff_id })
+        // console.log(dropoff);
+        if (dropoff) {
+            const dropoffToDelete = await dropoffSchema.deleteOne({ _id: req.params.dropoff_id })
+            res.json(dropoffToDelete)
+            // res.send('Drop-off deleted successfully')
+        }
+        else {
+            res.send("Drop-off doesn't exist!")
+        }
     } catch (error) {
-        res.status(400).json({ message: error })
+        res.json({ message: error })
+    }
+})
+
+// delete pick-up
+router.delete('/pickup/:pickup_id', async (req, res) => {
+    try {
+        const pickup = await eventSchema.findById({ _id: req.params.pickup_id })
+        // console.log(pickup);
+        if (pickup) {
+            const pickupToDelete = await pickupSchema.deleteOne({ _id: req.params.pickup_id })
+            res.json(pickupToDelete)
+            // res.send('Pick-up deleted successfully')
+        }
+        else {
+            res.send("Pick-up doesn't exist!")
+        }
+    } catch (error) {
+        res.json({ message: error })
     }
 })
 
 
 // delete a settings
-router.delete('/settings/:settings_no', async (req, res) => {
+router.delete('/settings/:settings_id', async (req, res) => {
     try {
-        const settings = await settingSchema.findById(req.params.id)
-        if (!settings) {
-            res.status(404).send("School doesn't exist!")
+        const settings = await settingSchema.findById({ _id: req.params.settings_id })
+        // console.log(settings);
+        if (settings) {
+            const settingsToDelete = await settingSchema.deleteOne({ _id: req.params.settings_id })
+            res.json(settingsToDelete)
+            // res.send('Settings deleted successfully')
         }
-        const settingsToDelete = await settingSchema.deleteOne({ _id: req.params.settings_no }) //checking if school with specified id exists in db/schema
-        res.json(settingsToDelete)
-
+        else {
+            res.send("Settings doesn't exist!")
+        }
     } catch (error) {
         res.json({ message: error })
     }

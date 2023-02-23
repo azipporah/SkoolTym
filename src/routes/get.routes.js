@@ -11,7 +11,8 @@ const roleSchema = require('../models/roles.model')
 const overtimeSchema = require('../models/overtime.model')
 const settingSchema = require('../models/settings.model')
 const yearOfStudySchema = require('../models/yearOfStudy.model')
-const dropPickSchema = require('../models/dropOff-pickUp.model')
+const dropoffSchema = require('../models/dropoff.model')
+const pickupSchema = require('../models/pickup.model')
 
 // get all schools
 router.get("/schools", async (req, res) => {
@@ -76,10 +77,19 @@ router.get("/overtime", async (req, res) => {
     });
 });
 
+// get all dropOffs
+router.get("/dropoff", async (req, res) => {
+    dropoffSchema.find().then((dropoff) => {
+        res.status(200).send(dropoff)
+    }).catch((error) => {
+        res.status(400).send(error)
+    });
+});
+
 // get all pickups/dropOffs
-router.get("/dropPick", async (req, res) => {
-    dropPickSchema.find().then((dropPick) => {
-        res.status(200).send(dropPick)
+router.get("/pickup", async (req, res) => {
+    pickupSchema.find().then((pickup) => {
+        res.status(200).send(pickup)
     }).catch((error) => {
         res.status(400).send(error)
     });

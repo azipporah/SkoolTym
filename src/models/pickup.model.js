@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const pickDropSchema = mongoose.Schema({
+const pickupSchema = mongoose.Schema({
     school_name: {
         type: mongoose.Types.ObjectId,
         ref: "school",
@@ -9,15 +9,6 @@ const pickDropSchema = mongoose.Schema({
     student_name: {
         type: mongoose.Types.ObjectId,
         ref: "Students",
-        required: true
-    },
-    drop_off_time: {
-        type: String,
-        required: true
-    },
-    dropped_by: {
-        type: mongoose.Types.ObjectId,
-        ref: "Guardians",
         required: true
     },
     pick_up_time: {
@@ -38,12 +29,12 @@ const pickDropSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    pickDrop_key: [{
+    pickup_key: [{
         key: Number
     }]
 }, {
     timestamps: true
 })
 
-const pickDrop = mongoose.model("PickDrop", pickDropSchema)
-module.exports = pickDrop
+const pickup = mongoose.model("Pickup", pickupSchema)
+module.exports = pickup

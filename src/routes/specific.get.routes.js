@@ -10,7 +10,8 @@ const guardianSchema = require('../models/guardians.model')
 const roleSchema = require('../models/roles.model')
 const yearOfStudySchema = require('../models/yearOfStudy.model')
 const overtimeSchema = require('../models/overtime.model')
-const dropPickSchema = require('../models/dropOff-pickUp.model')
+const dropoffSchema = require('../models/dropoff.model')
+const pickupSchema = require('../models/pickup.model')
 const settingSchema = require('../models/settings.model')
 
 // fetching a specific school
@@ -90,11 +91,22 @@ router.get("/overtime/:overtime_id", async (req, res) => {
 
 });
 
-// fetching a specific drop/pick
-router.get("/dropPick/:dropPick_id", async (req, res) => {
+// fetching a specific dropoff
+router.get("/dropoff/:dropoff_id", async (req, res) => {
     try {
-        const dropPick = await dropPickSchema.findById(req.params.dropPick_id)
-        res.status(200).send(dropPick)
+        const dropoff = await dropoffSchema.findById(req.params.dropoff_id)
+        res.status(200).send(dropoff)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+
+});
+
+// fetching a specific pickup
+router.get("/pickup/:pickup_id", async (req, res) => {
+    try {
+        const pickup = await pickupSchema.findById(req.params.pickup_id)
+        res.status(200).send(pickup)
     } catch (error) {
         res.status(400).send(error)
     }

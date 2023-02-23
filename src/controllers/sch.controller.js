@@ -1,7 +1,10 @@
 const express = require('express')
-const schoolSchema = require('../models/schools.model')
-const multer = require('multer')
 const router = express.Router()
+const multer = require('multer')
+const schoolSchema = require('../models/schools.model')
+// const roleSchema = require('../models/roles.model')
+// const staffSchema = require('../models/staff.model')
+// const {validationResult} = require('express-validator')
 
 
 // multer code
@@ -63,7 +66,6 @@ module.exports =  {
                     school_about: req.body.school_about,
                     school_key: req.body.school_key
                 }
-
                 const newSchool = await schoolSchema.create(school)
                 newSchool.save().then(() => {res.status(201).send(newSchool)})
             }

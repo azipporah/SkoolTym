@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const {check} = require('express-validator')
 
 // importing models
 // const validateSchool = require('../validations/school.validation')
@@ -11,14 +12,17 @@ const router = express.Router()
 
 // importing controller files
 const schoolController = require('../controllers/sch.controller')
+// const schoolController = require('../controllers/school')
 const studentController = require('../controllers/student.controller')
 const roleController = require('../controllers/roles.controller')
 const staffController = require('../controllers/staff.controller')
 const guardianController = require('../controllers/guardian.controller')
 const yearOfStudyController = require('../controllers/yearOfStudy.controller')
 const overtimeController = require('../controllers/overtime.controller')
-const dropPickController = require('../controllers/dropPick.controller')
+const pickupController = require('../controllers/pickup.controller')
+const dropoffController = require('../controllers/dropoff.controller')
 const settingController = require('../controllers/settings.controller')
+const staffloginController = require('../controllers/stafflogin.controller')
 
 
 // schools post route
@@ -29,13 +33,15 @@ router.post('/schools/create', schoolController.create )
 router.use('student_profile_pic', express.static('./uploads/images'))
 router.post('/students/create', studentController.create)
 
-
 // roles postroute
 router.post('/roles/create', roleController.create)
 
 // staff postroute
 router.use('staff_profile_pic', express.static('./uploads/images'))
 router.post('/staff/create', staffController.create)
+
+// staff-login
+router.post('/login', staffloginController.login )
 
 // guardian postroute
 router.use('guardian_profile_pic', express.static('./uploads/images'))
@@ -47,8 +53,11 @@ router.post('/years/create', yearOfStudyController.create)
 // overtime postroute
 router.post('/overtime/create', overtimeController.create)
 
-// drop-off/pick-up postroute
-router.post('/dropPick/create', dropPickController.create)
+// drop-off postroute
+router.post('/dropoff/create', dropoffController.create)
+
+// pick-up postroute
+router.post('/pickup/create', pickupController.create)
 
 // settings postroute
 router.post('/settings/create', settingController.create)

@@ -12,7 +12,7 @@ const schoolSchema = new mongoose.Schema({
     },
     school_badge: {
         type: String,
-        required: true,
+        // required: true,
         data: Buffer,
         contentType: String
     },
@@ -27,6 +27,10 @@ const schoolSchema = new mongoose.Schema({
     school_about: {
         type: String,
         required: true
+    },
+    super_admin_staff : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Staff'
     },
     school_key: [{
         key:Number        

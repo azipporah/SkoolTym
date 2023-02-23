@@ -4,8 +4,8 @@ const autoIncrementRole = require('mongoose-sequence')(mongoose)
 const roleSchema = mongoose.Schema({
     role_type:{
         type: String,
-        enum: ['Admin', 'Finance', 'Tracker','Guardian'],
-        default: 'Admin',
+        enum: ['SuperAdmin', 'Finance', 'Teacher'],
+        default: 'SuperAdmin',
         required: true
     },
     role_key: [{
